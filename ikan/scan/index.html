@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>SCAN - Javawebster</title>
+	 <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+	<div class="scan">
+		<div class="flash"></div>
+		<div class="ikanFrame">
+			<img src="../svg/ikan.svg" />
+		</div>
+		<video autoplay></video>
+		<a href="#shot" class="shot">Shot</a>
+	</div>
+	<div class="hasil">
+		<canvas></canvas>
+		<img src="" />
+		<div class="navArrow back" onClick="window.location.reload();">CANCEL</div>
+		<div class="navArrow next js-share"> OK</div>
+	</div>
+<script src="../js/jquery.js"></script>
+<script>
+		localStorage["foto"] = "";
+		var camera = document.querySelector('video');
+		var image = document.querySelector('.hasil img');
+		var canvas = document.querySelector('canvas');
+		var ctx = canvas.getContext('2d');
+		var imgPng = "";
+		var canvasData = "";
+		var timeDb = "";
+		
+		var setting = {
+			video: {
+			facingMode: "environment",
+			width: 1920,
+			height: 1080,
+			frameRate: {
+				ideal: 60,
+				min: 30
+			}
+		}};
+
+		navigator.mediaDevices.getUserMedia(setting).then(function(stream){
+			camera.srcObject = stream;
+		});
+		
+		$(document).on("click", ".shot", function(e){
+			if($(this).hasClass("active")){
+				return false;
+			}
+			$(this).addClass("active");
+			var _langkah1 = $(".langkah1");
+			var _info = $(".info");
+			var _flash = $(".flash");
+			_flash.fadeIn(50).fadeOut(50).fadeIn(50).fadeOut(50).fadeIn(50, function(){
+				capture();
+			});
+			return false;
+		});
+		
+		function stopCam(){
+			var stream = camera.srcObject;
+			var tracks = stream.getTracks();
+			tracks.forEach(function(track) {
+				track.stop();
+			});
+			camera.srcObject = null;
+		}
+
+		function capture() {
+			$(".hasil").fadeIn();
+			canvas.width = camera.videoWidth;
+			canvas.height = camera.videoWidth;
+			ctx.drawImage(camera, 0, 0);
+			//ctx.drawImage(camera, 0, 0, camera.videoWidth, camera.videoHeight);
+			//ctx.drawImage(camera, ((camera.videoHeight-camera.videoWidth) / 2), 0, camera.videoWidth, camera.videoWidth, 0, 0, camera.videoWidth, camera.videoHeight);
+			
+			image.src = canvas.toDataURL('image/jpeg', 0.5);
+			canvasData = canvas.toDataURL('image/jpeg', 0.5);
+			stopCam();
+		};
+		function simpan(dataSimpan, waktu){
+			$.ajax({
+				url:'../php/simpan.php', 
+				type:'POST', 
+				data:{
+					data: dataSimpan, 
+					time: waktu
+				},
+				success: function(){
+					location.reload();
+				}
+			});
+		}
+		
+		$(document).on("click", ".js-share", function(e){
+			$(".hasil").fadeOut();
+			$(".share").fadeIn();
+			timeDb = Math.floor(Date.now() / 1000);
+			simpan(canvasData, timeDb);
+			return false;
+		});
+</script>
+</body>
+</html> 

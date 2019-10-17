@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>IKAN - Javawebster</title>
+	 <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body style="overflow:hidden;">
+	<div class="box">
+		
+	</div>
+<script src="js/jquery.js"></script>
+<script>
+	var _img = "";
+	var _svg = "";
+	
+	if(typeof(EventSource)!=="undefined") {
+		var eSource = new EventSource("php/sse.php");
+		eSource.onmessage = function(event) {
+			var myJSON = JSON.parse(event.data);
+			var i;
+			for (i = 0; i < myJSON.length; i++) {
+				if(!$(".box").find("[alt='"+myJSON[i]+"']").length){
+					mulaiPlay(myJSON[i]);
+					//$(".box").append("<p alt='"+myJSON[i]+"'>"+myJSON[i]+"</p>");
+					//$(".list").append("<img style='display:none;' src="+myJSON[i]+" />");
+					//$(".list").html("<img src="+myJSON[i]+" />");
+					//muncul($(".list").find("[src='"+myJSON[i]+"']"));
+				}
+			} 
+		};
+	}
+	
+	$(document).on("click", ".box", function(e){
+		_svg = "svg/ikan.svg";
+		var _thiss = $(this);
+		$.get(_svg, function(data){
+			var _hasilss = $("<div class='ikan'>"+data+"</div>");
+			_hasilss.find(".images").each(function(){
+				//$(this).attr("xlink:href", _img);
+			});
+			_thiss.append(_hasilss);
+			_img = "";
+			animateIMG(_hasilss);
+		},'text');
+		if($(this).find(".ikan").length >= 10){
+			$(".ikan").first().css( "opacity", "0" );
+			setTimeout(function(){
+				$(".ikan").first().remove();
+			}, 5000);
+		}
+	});
+	
+	function mulaiPlay(axxx){
+		_img = "img/"+axxx;
+		_svg = "svg/ikan.svg";
+		var _thiss = $(".box");
+		var gg = $.get(_svg, function(data){
+			var _hasilss = $("<div class='ikan' alt='"+axxx+"'>"+data+"</div>");
+			_hasilss.find(".images").each(function(){
+				$(this).attr("xlink:href", _img);
+			});
+			_thiss.append(_hasilss);
+			_img = "";
+			animateIMG(_hasilss);
+		},'text');
+		if(_thiss.find(".ikan").length >= 10){
+			$(".ikan").first().css( "opacity", "0" );
+			setTimeout(function(){
+				$(".ikan").first().remove();
+			}, 5000);
+		}
+	}
+
+function myMove(_hasil) {
+	if(_hasil.css("width")=="200px"){
+		_hasil.css({"opacity":"1","width":"120","height":"120"});
+	}
+	var elem = _hasil[0];
+    var speed = 10;
+    var angle = 0;
+    var x = elem.style.left;
+    var y = elem.style.top;  
+	var pos = 0;
+	var interval = setInterval(function(){
+		speed++;
+        elem.style.left = speed * Math.sin(angle) + "px";
+        elem.style.top = speed * Math.cos(angle) + "px";
+	},20);
+}
+
+function makeNewPosition(){
+    var h = $(window).height() - 0;
+    var w = $(window).width() - 0;
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+    return [nh,nw];
+}
+
+function animateIMG(_hasil){
+	if(_hasil.css("width")=="200px"){
+		_hasil.css({"opacity":"1","width":"120","height":"120"});
+	}
+    var newq = makeNewPosition();
+    var oldq = _hasil.offset();
+    var speed = calcSpeed([oldq.top, oldq.left], newq);
+    var angle = getNewAngle([oldq.top, oldq.left], newq);
+	_hasil.css({"transform" : "rotate("+angle+"deg)"});
+    _hasil.animate({ top: newq[0], left: newq[1]}, speed, "linear", function(){
+      animateIMG(_hasil);        
+    });
+};
+
+function calcSpeed(prev, next) {
+    var x = Math.abs(prev[1] - next[1]);
+    var y = Math.abs(prev[0] - next[0]);
+    var greatest = x > y ? x : y;
+    var speedModifier = 0.1;// control the speed here 
+    var speed = Math.ceil(greatest/speedModifier);
+    return speed;
+}
+
+function getNewAngle(prev, next){
+   var x = next[1] - prev[1];
+   var y = next[0] - prev[0];
+   var ang = Math.atan(Math.abs(y)/Math.abs(x))/(Math.PI/180)
+   if(x>0&&y>0)
+   return ang;
+   else if(x<0&&y>0)
+   return ang+90;
+   else if(x>0&&y<0)
+   return ang-90;
+   else
+   return ang+180
+}
+</script>
+</body>
+</html> 
