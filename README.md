@@ -30,6 +30,5 @@ source code
 - Maptastic by Maptastic https://github.com/glowbox/maptasticjs
 - Animation Source by Matthew Dalli  https://www.youtube.com/watch?v=1lk26M0JLag,  AnimakersLT https://www.youtube.com/watch?v=2a8dljAqVgE
 
-<a href="https://danartri.github.io/simplemapper/
-">here</a>
+<a href="https://danartri.github.io/simplemapper/">here</a>
 
