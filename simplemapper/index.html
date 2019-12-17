@@ -1,0 +1,37 @@
+<html>
+<head>
+<style>
+body{
+	margin:0;
+	padding:0;
+	background:black;
+	color:white;
+}
+  
+</style>
+  
+</head>
+<body>
+  
+ <iframe width="720" height="468" src="https://www.youtube.com/embed/1lk26M0JLag?controls=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" id="element-id1" ></iframe>
+   
+ <iframe width="720" height="468" src="https://www.youtube.com/embed/2a8dljAqVgE?controls=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" id="element-id2" ></iframe>
+  
+	<script src="./build/maptastic.min.js"></script>
+	<script>
+	
+    Maptastic("element-id1", "element-id2" );
+    
+	var configObject = {
+		autoSave: false,
+		autoLoad: false,
+		onchange: myChangeHandler,
+		layers: ["element-id1", "element-id2"]
+	};
+	var maptastic = Maptastic(configObject);
+
+    
+	</script>
+</body>
+
+</html>
