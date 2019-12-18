@@ -2,9 +2,8 @@
 Danar Tri Yudistira
 # Aquaskets
 coloring papper,scan, getlive fish
-danartri.github.io/ikan
-<a href="https://danartri.github.io/ikan/
-">here</a>
+https://danartri.github.io/ikan/
+
 
 # SimpleMapper
 SimpleVideo Mapping
@@ -32,4 +31,4 @@ source code
 - Maptastic by Maptastic https://github.com/glowbox/maptasticjs
 - Animation Source by Matthew Dalli  https://www.youtube.com/watch?v=1lk26M0JLag,  AnimakersLT https://www.youtube.com/watch?v=2a8dljAqVgE
 
-<a href="danartri.github.io/simplemapper/">here</a>
+danartri.github.io/simplemapper
