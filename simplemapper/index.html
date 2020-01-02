@@ -12,7 +12,7 @@ body{
   
 </head>
 <body>
-  <iframe src="https://www.youtube.com/embed/1lk26M0JLag?controls=1" style="position: relative; left: -100px; top: -100px">
+  <iframe src="https://www.youtube.com/embed/1lk26M0JLag?controls=1" style="position: relative; left: -100px; top: -100px" id="element-id3" ></iframe>
 
  <iframe width="720" height="468" src="https://www.youtube.com/embed/1lk26M0JLag?controls=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" id="element-id1" ></iframe>
    
@@ -27,7 +27,7 @@ body{
 		autoSave: false,
 		autoLoad: false,
 		onchange: myChangeHandler,
-		layers: ["element-id1", "element-id2"]
+		layers: ["element-id1", "element-id2" , "element-id3"]
 	};
 	var maptastic = Maptastic(configObject);
 
