@@ -20,7 +20,7 @@
 	       height: 812px; 
 	       margin-top: -486px; 
 	       width: 650px;"
- id="element-id3" >
+ id="element-id1" >
 	</iframe>	
 	
  <iframe 
@@ -32,7 +32,7 @@ width="720" height="468"
 		encrypted-media; 
 		gyroscope; 
 		picture-in-picture" 
-	 id="element-id1" >
+	 id="element-id2" >
 	</iframe>
 
 
@@ -58,19 +58,19 @@ width="720" height="468"
 		encrypted-media; 
 		yroscope; 
 		picture-in-picture" 
-	 id="element-id2" >
+	 id="element-id4" >
 	</iframe>
   
 	<script src="./build/maptastic.min.js"></script>
 	<script>
 	
-    Maptastic("element-id1", "element-id2" , "element-id3" );
+    Maptastic("element-id1", "element-id2" , "element-id3" , "element-id4" );
     
 	var configObject = {
 		autoSave: false,
 		autoLoad: false,
 		onchange: myChangeHandler,
-		layers: ["element-id1", "element-id2" , "element-id3"]
+		layers: ["element-id1", "element-id2" , "element-id3", "element-id4"]
 	};
 	var maptastic = Maptastic(configObject);
 
