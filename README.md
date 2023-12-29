@@ -7,10 +7,12 @@ danartri.github.io/ikan
 <a href="https://danartri.github.io/ikan/
 ">here</a>
 
+<a href="https://danartri.github.io/simplemapper/">here</a>
+
+
 # SimpleMapper
 SimpleVideo Mapping
 danartri.github.io/simplemapper
-
 SHIFT-Space: Toggle edit mode
 
 In Edit Mode
